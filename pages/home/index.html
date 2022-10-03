@@ -5,15 +5,43 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Control Finance</title>
-    <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/assets/img/favicon.ico" type="image/x-icon">
     <meta name="description" content="Control Finance - Seu controle financeiro">
     <link rel="stylesheet" href="/styles/globalStyles.css">
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="/styles/modal.css">
+    <link rel="stylesheet" href="/styles/button.css">
+    <link rel="stylesheet" href="/styles/input.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <main id="app"></main>
+    <header>
+        <div class="container">
+            <h1 class="titulo_header"> <span class="titulo_header_colorBrand1">Control</span> <sapn class="titulo_header_colorGrey1">Finance</sapn></h1>
+            <button class="bt_header" id="abrir_modal">Registrar novo valor</button>
+        </div>
+    </header>
+    <main id="app">
+        <section>
+            <div class="resumo_financeiro container">
+                <h2>Resumo financeiro</h2>
+                <div>
+                    <button class="bt_opcoes">Todos</button>
+                    <button class="bt_opcoes" id="entradas">Entradas</button>
+                    <button class="bt_opcoes">Saídas</button>
+                </div>
+            </div>
+        </section>
+        <div class="container soma_valores">
+            <h4>Soma dos valores</h4>
+            <span id="valorTotal">R$ 0.00</span>
+        </div>
+        <section >
+            <ul class="container_lista_financeiro">
+            </ul>
+        </section>
+    </main>
     <script src="/scripts/modal.js"></script>
     <script src="valuesData.js"></script>
-    <script src="index.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

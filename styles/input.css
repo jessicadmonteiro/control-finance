@@ -1,0 +1,33 @@
+.input_modal{
+    height: 2.75rem;
+    background: var(--fixed-white);
+    border: 1.5px solid var(--color-grey-3);
+    border-radius: 8px;
+}
+
+.input_modal::placeholder{
+    padding-left: 0.93rem;
+}
+
+.input_label{
+    display: none;
+
+}
+
+.input_label:checked + label{
+    border-color: var(--color-brand-1);
+    color: var(--color-brand-1);
+    background-color: var(--color-brand-3);
+}
+
+.label_modal{
+    width: 4.12rem;
+    height: 2rem;
+    text-align: center;
+    padding-top: 0.43rem;
+    font-size: var(--font-size-4);
+    background: var(--fixed-white);
+    border: 1.5px solid var(--color-grey-5);
+    border-radius: 8px;
+    color: var(--color-grey-2);
+}
