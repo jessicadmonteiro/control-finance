@@ -1,3 +1,16 @@
+function adicionarNaLista (lista, referenciaHtml){
+    referenciaHtml.innerText = ""
+
+    lista.forEach(element => {
+        let valorFinanceiro = element
+        if(valorFinanceiro.category == "entrada" ||valorFinanceiro.category == "saida"){
+            let valorCriado = criarListaFinanceiro(valorFinanceiro)
+            referenciaHtml.appendChild(valorCriado)
+        }
+    })
+
+}
+
 function criarModal () {
 
     divModal          = document.createElement("div")
@@ -85,20 +98,12 @@ function criarModal () {
             }
         });
         
+        valorRecebido.id = insertedValues.length
+
         insertedValues.push(valorRecebido)
+
         
-    function adicionarNaLista (lista, referenciaHtml){
-    referenciaHtml.innerText = ""
 
-    lista.forEach(element => {
-        let valorFinanceiro = element
-        if(valorFinanceiro.category == "entrada" ||valorFinanceiro.category == "saida"){
-            let valorCriado = criarListaFinanceiro(valorFinanceiro)
-            referenciaHtml.appendChild(valorCriado)
-        }
-    })
-
-}
     adicionarNaLista (insertedValues, listaFinanceira)
 
         divModal.remove()
@@ -123,3 +128,4 @@ abrirModal.addEventListener("click", () =>{
 
     body.append(modal)
 })
+

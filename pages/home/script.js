@@ -11,6 +11,8 @@ function criarListaFinanceiro (elemento){
     let tagBotaoOpcoes  = document.createElement("button")
     let tagBotaoLixeira = document.createElement("button")
 
+
+
     tagLi.classList.add("container")
     tagDiv.classList.add("container_bts")
     tagBotaoOpcoes.classList.add("bt")
@@ -26,12 +28,10 @@ function criarListaFinanceiro (elemento){
     
     tagBotaoOpcoes.id   = id
     tagBotaoLixeira.id  = "removerValor"
-
-    tagLi.appendChild(tagH3)
-    tagLi.appendChild(tagDiv)
-    tagDiv.append(tagBotaoOpcoes, tagBotaoLixeira)
-
+    
     let arr = []
+    
+    
     const valorInserido = insertedValues.filter((elemento)=>{
         
         let valorInserido = elemento.value
@@ -43,23 +43,78 @@ function criarListaFinanceiro (elemento){
 
         document.querySelector("#valorTotal").innerHTML = `R$ ${valorRecebido}`
 
-
     })
-    
 
+    // removendo li
+    tagBotaoLixeira.addEventListener("click", (event) =>{
+        let elemento = event.target.id
+        let idElemento = elemento.id
+        let id = parseInt(idElemento)
+        let elementoEncontrado = insertedValues.find((element)=>{
+            return element.id === id
+        })
+
+        let index = insertedValues.indexOf(elementoEncontrado)
+        insertedValues.splice(index, 1)
+
+        let tagLi = event.path[2]
+        tagLi.remove()
+        
+    })
+
+
+    tagLi.appendChild(tagH3)
+    tagLi.appendChild(tagDiv)
+    tagDiv.append(tagBotaoOpcoes, tagBotaoLixeira)
+    
     return tagLi
 }
 
 
-listaFinanceira.addEventListener("click", remover)
-function remover (event){
+const selecionarTodos = document.querySelector("#todos")
+selecionarTodos.addEventListener("click", () =>{
 
-    let elemento = event.target
-    if(elemento.id === "removerValor"){
-        let li = elemento.closest("li")
-        li.remove()
-    }
+    adicionarNaLista(insertedValues, listaFinanceira )
 
-}
+})
 
+
+const selecionarEntradas = document.querySelector("#entradas")
+selecionarEntradas.addEventListener("click", () =>{
+
+    const novoArray = insertedValues.filter((element) => element.category.includes("entrada"))
+    
+    let arryEntrada = []
+    const valorEntrada = novoArray.filter((elemento) =>{
+        let valorElemento = elemento.value
+        arryEntrada.push(valorElemento)
+    })
+    let somaEntrada = arryEntrada.reduce((valorAnterior, valorAtual) => {
+        return Number(valorAnterior) + Number( valorAtual)
+    })
+    
+    adicionarNaLista(novoArray, listaFinanceira )
+
+    document.querySelector("#valorTotal").innerHTML = `R$ ${somaEntrada}`
+})
+
+
+const selecionarSaidas = document.querySelector("#saidas")
+selecionarSaidas.addEventListener("click", () =>{
+    
+    const novoArray = insertedValues.filter((element) => element.category.includes("saida"))
+
+    let arraySaida = []
+    const valorSaida = novoArray.filter((elemento) =>{
+        let valorElemento = elemento.value
+        arraySaida.push(valorElemento)
+    })
+    let somaSaida = arraySaida.reduce((valorAnterior, valorAtual) => {
+        return Number(valorAnterior) + Number( valorAtual)
+    })
+
+    adicionarNaLista(novoArray, listaFinanceira )
+
+    document.querySelector("#valorTotal").innerHTML = `R$ ${somaSaida}`
+})
 
