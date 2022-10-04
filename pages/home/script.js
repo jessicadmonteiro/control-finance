@@ -28,24 +28,9 @@ function criarListaFinanceiro (elemento){
     
     tagBotaoOpcoes.id   = id
     tagBotaoLixeira.id  = "removerValor"
-    
-    let arr = []
-    
-    
-    const valorInserido = insertedValues.filter((elemento)=>{
-        
-        let valorInserido = elemento.value
-        arr.push(valorInserido)
-        
-        const valorRecebido = arr.reduce((valorAnterior, valorAtual) =>{
-            return  Number(valorAnterior) + Number(valorAtual )
-        })
 
-        document.querySelector("#valorTotal").innerHTML = `R$ ${valorRecebido}`
-
-    })
-
-    // removendo li
+    document.querySelector("#valorTotal").innerHTML = `R$ ${soma(insertedValues)}`
+    
     tagBotaoLixeira.addEventListener("click", (event) =>{
         let elemento = event.target.id
         let idElemento = elemento.id
@@ -59,6 +44,8 @@ function criarListaFinanceiro (elemento){
 
         let tagLi = event.path[2]
         tagLi.remove()
+
+        document.querySelector("#valorTotal").innerHTML = `R$ ${soma(insertedValues)}`
         
     })
 
@@ -68,6 +55,11 @@ function criarListaFinanceiro (elemento){
     tagDiv.append(tagBotaoOpcoes, tagBotaoLixeira)
     
     return tagLi
+}
+
+function soma(valor){
+    const somaDosValore = valor.map(elemento => elemento.value).reduce((acumulador, valorAtual) => Number(acumulador) + Number(valorAtual), 0)
+    return somaDosValore
 }
 
 
@@ -97,7 +89,6 @@ selecionarEntradas.addEventListener("click", () =>{
 
     document.querySelector("#valorTotal").innerHTML = `R$ ${somaEntrada}`
 })
-
 
 const selecionarSaidas = document.querySelector("#saidas")
 selecionarSaidas.addEventListener("click", () =>{
